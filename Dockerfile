@@ -15,4 +15,4 @@ RUN pip install --upgrade pip \
 
 ADD collectd.conf.tpl /etc/collectd/collectd.conf.tpl
 ADD collectd.d /etc/collectd/collectd.d
-CMD for template in /etc/collectd/collectd.conf.tpl /etc/collectd/collectd.d/*.tpl ; do envtpl $template ; done && exec collectd -f
+CMD for template in /etc/collectd/collectd.conf.tpl; do envtpl $template ; done && exec collectd -f

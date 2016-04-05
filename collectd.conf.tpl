@@ -1,4 +1,4 @@
-Hostname "{{ HOSTNAME }}"
+Hostname "Ganesha"
 
 FQDNLookup false
 Interval 10
