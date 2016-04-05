@@ -1,7 +1,7 @@
 #!/bin/sh
 
 HOSTNAME="${COLLECTD_HOSTNAME:-localhost}"
-INTERVAL="${COLLECTD_INTERVAL:-1800}"
+INTERVAL="1800"
 
 speedtest() {
 	/usr/bin/speedtest-cli --simple
@@ -13,7 +13,7 @@ while sleep "$INTERVAL"; do
 	DOWNLOAD=`echo "$LOG" | egrep "^Download:" | egrep -o "[0-9]+\.[0-9]+"`
 	UPLOAD=`echo "$LOG" | egrep "^Upload:" | egrep -o "[0-9]+\.[0-9]+"`
 	if [[ ! -z "$PING" ]]; then
-		echo "PUTVAL \"$HOSTNAME/exec-speedtest/gauge-ping_ms\" interval=$INTERVAL N:$PING"
+		echo "PUTVAL \"$HOSTNAME/exec-speedtest/ping-ping_ms\" interval=$INTERVAL N:$PING"
 	fi
 
 	if [[ ! -z "$DOWNLOAD" ]]; then
