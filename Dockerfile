@@ -10,7 +10,6 @@ RUN apk add --update \
 		&& rm -rf /var/cache/apk/*
 
 RUN pip install --upgrade pip \
-		envtpl \
 		speedtest-cli
 
 ADD collectd.conf /etc/collectd/collectd.conf
