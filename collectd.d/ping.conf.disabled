@@ -1,6 +1,6 @@
 LoadPlugin ping
 
-<Plugin ping>
+<Plugin "ping">
   Host "telstra.com.au"
   Host "google.com"
   Interval 1.0

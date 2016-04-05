@@ -13,6 +13,7 @@ RUN pip install --upgrade pip \
 		envtpl \
 		speedtest-cli
 
-ADD collectd.conf.tpl /etc/collectd/collectd.conf.tpl
+ADD collectd.conf /etc/collectd/collectd.conf
 ADD collectd.d /etc/collectd/collectd.d
-CMD for template in /etc/collectd/collectd.conf.tpl; do envtpl $template ; done && exec collectd -f
+ADD speedtest.sh /usr/local/bin/speedtest.sh
+CMD chmod a+x /usr/local/bin/speedtest.sh && exec collectd -f
