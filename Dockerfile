@@ -10,6 +10,9 @@ RUN apk add --update \
 		&& rm -rf /var/cache/apk/*
 
 RUN pip install --upgrade pip \
-		envtpl
+		envtpl \
+		speedtest-cli
 
-RUN pip install speedtest-cli
+ADD collectd.conf.tpl /etc/collectd/collectd.conf.tpl
+ADD collectd.d /etc/collectd/collectd.d
+CMD for template in /etc/collectd/collectd.conf.tpl /etc/collectd/collectd.d/*.tpl ; do envtpl $template ; done && exec collectd -f
