@@ -1,18 +1,16 @@
-FROM alpine:latest
+FROM ubuntu:latest
 
 MAINTAINER Shuo Ran <me@rse43.com>
+ENV DEBIAN_FRONTEND noninteractive
 
-RUN apk add --update \
-		collectd \
-		collectd-curl \
-		collectd-network \
-		py-pip \
-		&& rm -rf /var/cache/apk/*
+RUN apt-get update
+RUN apt-get install -y curl supervisor collectd collectd-utils
 
-RUN pip install --upgrade pip \
-		speedtest-cli
+RUN apt-get clean
+RUN rm -rf /var/lib/apt/lists/*
 
+# configure
+ADD supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 ADD collectd.conf /etc/collectd/collectd.conf
-ADD collectd.d /etc/collectd/collectd.d
-ADD speedtest.sh /usr/local/bin/speedtest.sh
-CMD chmod a+x /usr/local/bin/speedtest.sh && exec collectd -f
+
+CMD supervisord -n
